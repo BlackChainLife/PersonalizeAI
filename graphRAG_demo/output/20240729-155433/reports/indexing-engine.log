@@ -1,0 +1,992 @@
+15:54:33,401 graphrag.config.read_dotenv INFO Loading pipeline .env file
+15:54:33,406 graphrag.index.cli INFO using default configuration: {
+    "llm": {
+        "api_key": "REDACTED, length 56",
+        "type": "openai_chat",
+        "model": "gpt-4o",
+        "max_tokens": 4000,
+        "temperature": 0.0,
+        "top_p": 1.0,
+        "n": 1,
+        "request_timeout": 180.0,
+        "api_base": "https://chatgptproxyapi-5uc.pages.dev/v1",
+        "api_version": null,
+        "proxy": null,
+        "cognitive_services_endpoint": null,
+        "deployment_name": null,
+        "model_supports_json": true,
+        "tokens_per_minute": 0,
+        "requests_per_minute": 0,
+        "max_retries": 10,
+        "max_retry_wait": 10.0,
+        "sleep_on_rate_limit_recommendation": true,
+        "concurrent_requests": 25
+    },
+    "parallelization": {
+        "stagger": 0.3,
+        "num_threads": 50
+    },
+    "async_mode": "threaded",
+    "root_dir": ".\\graphRAG_demo\\",
+    "reporting": {
+        "type": "file",
+        "base_dir": "output/${timestamp}/reports",
+        "storage_account_blob_url": null
+    },
+    "storage": {
+        "type": "file",
+        "base_dir": "output/${timestamp}/artifacts",
+        "storage_account_blob_url": null
+    },
+    "cache": {
+        "type": "file",
+        "base_dir": "cache",
+        "storage_account_blob_url": null
+    },
+    "input": {
+        "type": "file",
+        "file_type": "text",
+        "base_dir": "input",
+        "storage_account_blob_url": null,
+        "encoding": "utf-8",
+        "file_pattern": ".*\\.txt$",
+        "file_filter": null,
+        "source_column": null,
+        "timestamp_column": null,
+        "timestamp_format": null,
+        "text_column": "text",
+        "title_column": null,
+        "document_attribute_columns": []
+    },
+    "embed_graph": {
+        "enabled": false,
+        "num_walks": 10,
+        "walk_length": 40,
+        "window_size": 2,
+        "iterations": 3,
+        "random_seed": 597832,
+        "strategy": null
+    },
+    "embeddings": {
+        "llm": {
+            "api_key": "REDACTED, length 56",
+            "type": "openai_embedding",
+            "model": "text-embedding-3-small",
+            "max_tokens": 4000,
+            "temperature": 0,
+            "top_p": 1,
+            "n": 1,
+            "request_timeout": 180.0,
+            "api_base": "https://chatgptproxyapi-5uc.pages.dev/v1",
+            "api_version": null,
+            "proxy": null,
+            "cognitive_services_endpoint": null,
+            "deployment_name": null,
+            "model_supports_json": null,
+            "tokens_per_minute": 0,
+            "requests_per_minute": 0,
+            "max_retries": 10,
+            "max_retry_wait": 10.0,
+            "sleep_on_rate_limit_recommendation": true,
+            "concurrent_requests": 25
+        },
+        "parallelization": {
+            "stagger": 0.3,
+            "num_threads": 50
+        },
+        "async_mode": "threaded",
+        "batch_size": 16,
+        "batch_max_tokens": 8191,
+        "target": "required",
+        "skip": [],
+        "vector_store": null,
+        "strategy": null
+    },
+    "chunks": {
+        "size": 1200,
+        "overlap": 100,
+        "group_by_columns": [
+            "id"
+        ],
+        "strategy": null
+    },
+    "snapshots": {
+        "graphml": false,
+        "raw_entities": false,
+        "top_level_nodes": false
+    },
+    "entity_extraction": {
+        "llm": {
+            "api_key": "REDACTED, length 56",
+            "type": "openai_chat",
+            "model": "gpt-4o",
+            "max_tokens": 4000,
+            "temperature": 0.0,
+            "top_p": 1.0,
+            "n": 1,
+            "request_timeout": 180.0,
+            "api_base": "https://chatgptproxyapi-5uc.pages.dev/v1",
+            "api_version": null,
+            "proxy": null,
+            "cognitive_services_endpoint": null,
+            "deployment_name": null,
+            "model_supports_json": true,
+            "tokens_per_minute": 0,
+            "requests_per_minute": 0,
+            "max_retries": 10,
+            "max_retry_wait": 10.0,
+            "sleep_on_rate_limit_recommendation": true,
+            "concurrent_requests": 25
+        },
+        "parallelization": {
+            "stagger": 0.3,
+            "num_threads": 50
+        },
+        "async_mode": "threaded",
+        "prompt": "prompts/entity_extraction.txt",
+        "entity_types": [
+            "organization",
+            "person",
+            "geo",
+            "event"
+        ],
+        "max_gleanings": 1,
+        "strategy": null
+    },
+    "summarize_descriptions": {
+        "llm": {
+            "api_key": "REDACTED, length 56",
+            "type": "openai_chat",
+            "model": "gpt-4o",
+            "max_tokens": 4000,
+            "temperature": 0.0,
+            "top_p": 1.0,
+            "n": 1,
+            "request_timeout": 180.0,
+            "api_base": "https://chatgptproxyapi-5uc.pages.dev/v1",
+            "api_version": null,
+            "proxy": null,
+            "cognitive_services_endpoint": null,
+            "deployment_name": null,
+            "model_supports_json": true,
+            "tokens_per_minute": 0,
+            "requests_per_minute": 0,
+            "max_retries": 10,
+            "max_retry_wait": 10.0,
+            "sleep_on_rate_limit_recommendation": true,
+            "concurrent_requests": 25
+        },
+        "parallelization": {
+            "stagger": 0.3,
+            "num_threads": 50
+        },
+        "async_mode": "threaded",
+        "prompt": "prompts/summarize_descriptions.txt",
+        "max_length": 500,
+        "strategy": null
+    },
+    "community_reports": {
+        "llm": {
+            "api_key": "REDACTED, length 56",
+            "type": "openai_chat",
+            "model": "gpt-4o",
+            "max_tokens": 4000,
+            "temperature": 0.0,
+            "top_p": 1.0,
+            "n": 1,
+            "request_timeout": 180.0,
+            "api_base": "https://chatgptproxyapi-5uc.pages.dev/v1",
+            "api_version": null,
+            "proxy": null,
+            "cognitive_services_endpoint": null,
+            "deployment_name": null,
+            "model_supports_json": true,
+            "tokens_per_minute": 0,
+            "requests_per_minute": 0,
+            "max_retries": 10,
+            "max_retry_wait": 10.0,
+            "sleep_on_rate_limit_recommendation": true,
+            "concurrent_requests": 25
+        },
+        "parallelization": {
+            "stagger": 0.3,
+            "num_threads": 50
+        },
+        "async_mode": "threaded",
+        "prompt": "prompts/community_report.txt",
+        "max_length": 2000,
+        "max_input_length": 8000,
+        "strategy": null
+    },
+    "claim_extraction": {
+        "llm": {
+            "api_key": "REDACTED, length 56",
+            "type": "openai_chat",
+            "model": "gpt-4o",
+            "max_tokens": 4000,
+            "temperature": 0.0,
+            "top_p": 1.0,
+            "n": 1,
+            "request_timeout": 180.0,
+            "api_base": "https://chatgptproxyapi-5uc.pages.dev/v1",
+            "api_version": null,
+            "proxy": null,
+            "cognitive_services_endpoint": null,
+            "deployment_name": null,
+            "model_supports_json": true,
+            "tokens_per_minute": 0,
+            "requests_per_minute": 0,
+            "max_retries": 10,
+            "max_retry_wait": 10.0,
+            "sleep_on_rate_limit_recommendation": true,
+            "concurrent_requests": 25
+        },
+        "parallelization": {
+            "stagger": 0.3,
+            "num_threads": 50
+        },
+        "async_mode": "threaded",
+        "enabled": false,
+        "prompt": "prompts/claim_extraction.txt",
+        "description": "Any claims or facts that could be relevant to information discovery.",
+        "max_gleanings": 1,
+        "strategy": null
+    },
+    "cluster_graph": {
+        "max_cluster_size": 10,
+        "strategy": null
+    },
+    "umap": {
+        "enabled": false
+    },
+    "local_search": {
+        "text_unit_prop": 0.5,
+        "community_prop": 0.1,
+        "conversation_history_max_turns": 5,
+        "top_k_entities": 10,
+        "top_k_relationships": 10,
+        "temperature": 0.0,
+        "top_p": 1.0,
+        "n": 1,
+        "max_tokens": 12000,
+        "llm_max_tokens": 2000
+    },
+    "global_search": {
+        "temperature": 0.0,
+        "top_p": 1.0,
+        "n": 1,
+        "max_tokens": 12000,
+        "data_max_tokens": 12000,
+        "map_max_tokens": 1000,
+        "reduce_max_tokens": 2000,
+        "concurrency": 32
+    },
+    "encoding_model": "cl100k_base",
+    "skip_workflows": []
+}
+15:54:33,619 graphrag.index.create_pipeline_config INFO skipping workflows 
+15:54:33,621 graphrag.index.run INFO Running pipeline
+15:54:33,621 graphrag.index.storage.file_pipeline_storage INFO Creating file storage at graphRAG_demo\output\20240729-155433\artifacts
+15:54:33,622 graphrag.index.input.load_input INFO loading input from root_dir=input
+15:54:33,622 graphrag.index.input.load_input INFO using file storage for input
+15:54:33,623 graphrag.index.storage.file_pipeline_storage INFO search graphRAG_demo\input for files matching .*\.txt$
+15:54:33,624 graphrag.index.input.text INFO found text files from input, found [('book.txt', {})]
+15:54:33,626 graphrag.index.input.text INFO Found 1 files, loading 1
+15:54:33,628 graphrag.index.workflows.load INFO Workflow Run Order: ['create_base_text_units', 'create_base_extracted_entities', 'create_summarized_entities', 'create_base_entity_graph', 'create_final_entities', 'create_final_nodes', 'create_final_communities', 'join_text_units_to_entity_ids', 'create_final_relationships', 'join_text_units_to_relationship_ids', 'create_final_community_reports', 'create_final_text_units', 'create_base_documents', 'create_final_documents']
+15:54:33,628 graphrag.index.run INFO Final # of rows loaded: 1
+15:54:33,765 graphrag.index.run INFO Running workflow: create_base_text_units...
+15:54:33,765 graphrag.index.run INFO dependencies for create_base_text_units: []
+15:54:33,770 datashaper.workflow.workflow INFO executing verb orderby
+15:54:33,773 datashaper.workflow.workflow INFO executing verb zip
+15:54:33,777 datashaper.workflow.workflow INFO executing verb aggregate_override
+15:54:33,782 datashaper.workflow.workflow INFO executing verb chunk
+15:54:34,23 datashaper.workflow.workflow INFO executing verb select
+15:54:34,28 datashaper.workflow.workflow INFO executing verb unroll
+15:54:34,35 datashaper.workflow.workflow INFO executing verb rename
+15:54:34,43 datashaper.workflow.workflow INFO executing verb genid
+15:54:34,49 datashaper.workflow.workflow INFO executing verb unzip
+15:54:34,55 datashaper.workflow.workflow INFO executing verb copy
+15:54:34,60 datashaper.workflow.workflow INFO executing verb filter
+15:54:34,75 graphrag.index.emit.parquet_table_emitter INFO emitting parquet table create_base_text_units.parquet
+15:54:34,261 graphrag.index.run INFO Running workflow: create_base_extracted_entities...
+15:54:34,262 graphrag.index.run INFO dependencies for create_base_extracted_entities: ['create_base_text_units']
+15:54:34,262 graphrag.index.run INFO read table from storage: create_base_text_units.parquet
+15:54:34,280 datashaper.workflow.workflow INFO executing verb entity_extract
+15:54:34,289 graphrag.llm.openai.create_openai_client INFO Creating OpenAI client base_url=https://chatgptproxyapi-5uc.pages.dev/v1
+15:54:35,209 graphrag.index.llm.load_llm INFO create TPM/RPM limiter for gpt-4o: TPM=0, RPM=0
+15:54:35,209 graphrag.index.llm.load_llm INFO create concurrency limiter for gpt-4o: 25
+15:54:39,528 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:54:39,530 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "Process" with 0 retries took 4.25. input_tokens=3132, output_tokens=259
+15:54:41,667 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:54:41,668 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "Process" with 0 retries took 6.328000000095926. input_tokens=3134, output_tokens=319
+15:54:41,950 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:54:41,951 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "Process" with 0 retries took 6.655999999959022. input_tokens=3133, output_tokens=398
+15:54:43,446 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:54:43,447 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "Process" with 0 retries took 8.125. input_tokens=3134, output_tokens=432
+15:54:43,513 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:54:43,519 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "Process" with 0 retries took 8.202999999979511. input_tokens=3134, output_tokens=508
+15:54:43,620 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:54:43,621 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "Process" with 0 retries took 8.312000000034459. input_tokens=3134, output_tokens=666
+15:54:43,709 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:54:43,714 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "Process" with 0 retries took 8.437999999965541. input_tokens=3134, output_tokens=431
+15:54:45,162 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:54:45,163 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "Process" with 0 retries took 9.813000000081956. input_tokens=3134, output_tokens=501
+15:54:45,210 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:54:45,211 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "Process" with 0 retries took 9.890999999945052. input_tokens=3133, output_tokens=534
+15:54:45,771 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:54:45,772 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "Process" with 0 retries took 10.5. input_tokens=3134, output_tokens=409
+15:54:45,951 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:54:45,960 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "Process" with 0 retries took 10.702999999979511. input_tokens=3134, output_tokens=647
+15:54:46,71 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:54:46,77 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "Process" with 0 retries took 10.812000000034459. input_tokens=3133, output_tokens=521
+15:54:46,101 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:54:46,102 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "Process" with 0 retries took 10.858999999938533. input_tokens=3134, output_tokens=461
+15:54:46,218 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:54:46,225 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "Process" with 0 retries took 10.920999999972992. input_tokens=3134, output_tokens=682
+15:54:46,331 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:54:46,332 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "Process" with 0 retries took 11.093999999924563. input_tokens=3134, output_tokens=626
+15:54:47,311 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:54:47,312 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "Process" with 0 retries took 11.98499999998603. input_tokens=3134, output_tokens=631
+15:54:48,78 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:54:48,80 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "Process" with 0 retries took 6.140999999945052. input_tokens=3134, output_tokens=397
+15:54:48,598 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:54:48,599 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "Process" with 0 retries took 13.26500000001397. input_tokens=3134, output_tokens=814
+15:54:48,615 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:54:48,616 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "Process" with 0 retries took 13.281000000075437. input_tokens=3134, output_tokens=640
+15:54:48,779 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:54:48,780 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "Process" with 0 retries took 9.25. input_tokens=3134, output_tokens=632
+15:54:49,69 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:54:49,70 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "Process" with 0 retries took 13.812000000034459. input_tokens=3134, output_tokens=800
+15:54:49,355 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:54:49,356 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "Process" with 0 retries took 5.64000000001397. input_tokens=3133, output_tokens=406
+15:54:49,363 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:54:49,364 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "Process" with 0 retries took 14.031000000075437. input_tokens=3134, output_tokens=660
+15:54:50,208 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:54:50,209 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "Process" with 0 retries took 14.952999999979511. input_tokens=3134, output_tokens=586
+15:54:50,235 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:54:50,241 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "Process" with 0 retries took 14.891000000061467. input_tokens=3133, output_tokens=707
+15:54:50,315 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:54:50,316 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "Process" with 0 retries took 4.359000000054948. input_tokens=3133, output_tokens=292
+15:54:50,677 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:54:50,678 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "Process" with 0 retries took 4.344000000040978. input_tokens=3134, output_tokens=249
+15:54:50,870 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:54:50,871 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "Process" with 0 retries took 15.562000000034459. input_tokens=3134, output_tokens=947
+15:54:51,59 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:54:51,60 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "Process" with 0 retries took 7.532000000006519. input_tokens=3133, output_tokens=465
+15:54:51,301 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:54:51,302 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "Process" with 0 retries took 4.0. input_tokens=3134, output_tokens=248
+15:54:51,595 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:54:51,597 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "Process" with 0 retries took 9.936999999918044. input_tokens=3134, output_tokens=761
+15:54:51,678 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:54:51,679 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "Process" with 0 retries took 8.23499999998603. input_tokens=3134, output_tokens=546
+15:54:51,931 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:54:51,932 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "Process" with 0 retries took 16.640999999945052. input_tokens=3134, output_tokens=967
+15:54:52,998 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:54:53,4 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "Process" with 0 retries took 7.843999999924563. input_tokens=3135, output_tokens=547
+15:54:53,605 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:54:53,609 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "Process" with 0 retries took 7.5. input_tokens=3133, output_tokens=548
+15:54:54,30 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:54:54,31 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "Process" with 0 retries took 7.797000000020489. input_tokens=3134, output_tokens=379
+15:54:54,278 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:54:54,281 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "Process" with 0 retries took 6.203000000095926. input_tokens=2987, output_tokens=477
+15:54:54,328 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:54:54,329 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "Process" with 0 retries took 8.25. input_tokens=3133, output_tokens=523
+15:54:54,666 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:54:54,670 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "Process" with 0 retries took 11.047000000020489. input_tokens=3134, output_tokens=670
+15:54:54,745 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:54:54,746 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "Process" with 0 retries took 8.969000000040978. input_tokens=3134, output_tokens=629
+15:54:55,833 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:54:55,839 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "extract-continuation-0" with 0 retries took 4.780999999959022. input_tokens=19, output_tokens=352
+15:54:57,526 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:54:57,527 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "extract-continuation-0" with 0 retries took 8.905999999959022. input_tokens=19, output_tokens=642
+15:54:58,221 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:54:58,222 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "extract-continuation-0" with 0 retries took 9.452999999979511. input_tokens=19, output_tokens=759
+15:54:58,269 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:54:58,271 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "extract-continuation-0" with 0 retries took 7.592999999993481. input_tokens=19, output_tokens=527
+15:54:58,466 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:54:58,468 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "Process" with 0 retries took 13.25. input_tokens=3134, output_tokens=563
+15:54:59,263 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:54:59,264 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "extract-continuation-0" with 0 retries took 4.593999999924563. input_tokens=19, output_tokens=303
+15:54:59,375 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:54:59,376 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "extract-continuation-0" with 0 retries took 9.172000000020489. input_tokens=19, output_tokens=626
+15:54:59,858 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:54:59,859 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "extract-continuation-0" with 0 retries took 10.5. input_tokens=19, output_tokens=610
+15:55:02,401 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:02,408 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "extract-continuation-0" with 0 retries took 12.094000000040978. input_tokens=19, output_tokens=503
+15:55:02,530 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:02,531 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "extract-continuation-0" with 0 retries took 10.59299999999348. input_tokens=19, output_tokens=828
+15:55:02,722 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:02,723 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "extract-continuation-0" with 0 retries took 3.3429999999934807. input_tokens=19, output_tokens=184
+15:55:03,800 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:03,802 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "extract-continuation-0" with 0 retries took 12.125. input_tokens=19, output_tokens=879
+15:55:03,899 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:03,904 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "extract-continuation-0" with 0 retries took 15.297000000020489. input_tokens=19, output_tokens=1155
+15:55:04,43 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:04,44 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "extract-continuation-0" with 0 retries took 9.75. input_tokens=19, output_tokens=633
+15:55:04,78 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:04,84 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "extract-continuation-0" with 0 retries took 13.218999999924563. input_tokens=19, output_tokens=1091
+15:55:04,202 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:04,205 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "extract-continuation-0" with 0 retries took 10.187999999965541. input_tokens=19, output_tokens=788
+15:55:04,323 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:04,328 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "extract-continuation-0" with 0 retries took 14.952999999979511. input_tokens=19, output_tokens=950
+15:55:04,548 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:04,550 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "Process" with 0 retries took 29.32900000002701. input_tokens=3132, output_tokens=1795
+15:55:04,602 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:04,603 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "extract-continuation-0" with 0 retries took 6.327999999979511. input_tokens=19, output_tokens=267
+15:55:06,488 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:06,489 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "extract-continuation-0" with 0 retries took 8.969000000040978. input_tokens=19, output_tokens=604
+15:55:09,750 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:09,757 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "extract-continuation-0" with 0 retries took 5.547000000020489. input_tokens=19, output_tokens=224
+15:55:09,847 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:09,855 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "extract-continuation-0" with 0 retries took 11.625. input_tokens=19, output_tokens=829
+15:55:09,880 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:09,881 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "extract-continuation-0" with 0 retries took 20.81299999996554. input_tokens=19, output_tokens=725
+15:55:11,130 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:11,133 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "extract-continuation-0" with 0 retries took 17.53200000000652. input_tokens=19, output_tokens=1164
+15:55:11,440 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:11,442 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "extract-continuation-0" with 0 retries took 20.14000000001397. input_tokens=19, output_tokens=1602
+15:55:11,700 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:11,701 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "extract-continuation-0" with 0 retries took 7.89000000001397. input_tokens=19, output_tokens=503
+15:55:11,817 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:11,818 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "extract-continuation-0" with 0 retries took 7.780999999959022. input_tokens=19, output_tokens=477
+15:55:12,514 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:12,514 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "extract-continuation-0" with 0 retries took 8.187999999965541. input_tokens=19, output_tokens=424
+15:55:12,982 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:12,983 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "extract-continuation-0" with 0 retries took 10.561999999918044. input_tokens=19, output_tokens=803
+15:55:13,791 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:13,792 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "extract-continuation-0" with 0 retries took 11.063000000081956. input_tokens=19, output_tokens=926
+15:55:15,25 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:15,26 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "extract-continuation-0" with 0 retries took 19.18700000003446. input_tokens=19, output_tokens=1112
+15:55:15,54 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:15,55 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "extract-continuation-0" with 0 retries took 15.204000000027008. input_tokens=19, output_tokens=1093
+15:55:15,507 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:15,514 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "extract-continuation-0" with 0 retries took 11.422000000020489. input_tokens=19, output_tokens=882
+15:55:17,299 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:17,301 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "extract-continuation-0" with 0 retries took 25.70400000002701. input_tokens=19, output_tokens=1537
+15:55:20,30 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:20,33 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "extract-continuation-0" with 0 retries took 21.578000000095926. input_tokens=19, output_tokens=1401
+15:55:20,386 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:20,388 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "extract-continuation-0" with 0 retries took 30.140999999945052. input_tokens=19, output_tokens=1221
+15:55:21,680 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:21,682 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "extract-continuation-0" with 0 retries took 28.67200000002049. input_tokens=19, output_tokens=1515
+15:55:23,256 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:23,258 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "extract-continuation-0" with 0 retries took 24.0. input_tokens=19, output_tokens=1228
+15:55:25,601 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:25,602 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "extract-continuation-0" with 0 retries took 21.70299999997951. input_tokens=19, output_tokens=826
+15:55:28,413 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:28,416 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "extract-continuation-0" with 0 retries took 33.67200000002049. input_tokens=19, output_tokens=1590
+15:55:29,34 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:29,36 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "extract-continuation-0" with 0 retries took 26.5. input_tokens=19, output_tokens=1431
+15:55:31,163 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:31,307 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "extract-continuation-0" with 0 retries took 36.96900000004098. input_tokens=19, output_tokens=1910
+15:55:31,357 datashaper.workflow.workflow INFO executing verb merge_graphs
+15:55:31,399 graphrag.index.emit.parquet_table_emitter INFO emitting parquet table create_base_extracted_entities.parquet
+15:55:31,536 graphrag.index.run INFO Running workflow: create_summarized_entities...
+15:55:31,537 graphrag.index.run INFO dependencies for create_summarized_entities: ['create_base_extracted_entities']
+15:55:31,537 graphrag.index.run INFO read table from storage: create_base_extracted_entities.parquet
+15:55:31,552 datashaper.workflow.workflow INFO executing verb summarize_descriptions
+15:55:32,905 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:32,906 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "summarize" with 0 retries took 1.297000000020489. input_tokens=184, output_tokens=57
+15:55:33,306 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:33,312 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "summarize" with 0 retries took 1.687999999965541. input_tokens=169, output_tokens=42
+15:55:33,403 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:33,407 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "summarize" with 0 retries took 1.8130000000819564. input_tokens=300, output_tokens=87
+15:55:33,604 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:33,610 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "summarize" with 0 retries took 1.952999999979511. input_tokens=289, output_tokens=80
+15:55:33,711 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:33,712 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "summarize" with 0 retries took 2.093999999924563. input_tokens=246, output_tokens=59
+15:55:33,755 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:33,756 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "summarize" with 0 retries took 2.125. input_tokens=180, output_tokens=53
+15:55:33,770 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:33,771 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "summarize" with 0 retries took 2.172000000020489. input_tokens=411, output_tokens=83
+15:55:33,850 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:33,851 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "summarize" with 0 retries took 2.2179999999934807. input_tokens=269, output_tokens=79
+15:55:33,940 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:33,941 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "summarize" with 0 retries took 2.344000000040978. input_tokens=514, output_tokens=101
+15:55:34,55 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:34,57 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "summarize" with 0 retries took 2.437999999965541. input_tokens=296, output_tokens=99
+15:55:34,109 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:34,110 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "summarize" with 0 retries took 2.484000000054948. input_tokens=488, output_tokens=84
+15:55:34,120 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:34,124 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "summarize" with 0 retries took 1.2190000000409782. input_tokens=251, output_tokens=34
+15:55:34,306 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:34,313 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "summarize" with 0 retries took 2.672000000020489. input_tokens=518, output_tokens=109
+15:55:34,325 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:34,342 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "summarize" with 0 retries took 2.702999999979511. input_tokens=326, output_tokens=70
+15:55:34,450 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:34,456 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "summarize" with 0 retries took 2.812999999965541. input_tokens=596, output_tokens=119
+15:55:34,673 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:34,674 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "summarize" with 0 retries took 3.062999999965541. input_tokens=502, output_tokens=117
+15:55:34,736 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:34,737 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "summarize" with 0 retries took 3.094000000040978. input_tokens=498, output_tokens=136
+15:55:34,744 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:34,745 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "summarize" with 0 retries took 3.125. input_tokens=360, output_tokens=116
+15:55:34,925 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:34,926 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "summarize" with 0 retries took 3.2820000000065193. input_tokens=616, output_tokens=126
+15:55:35,128 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:35,136 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "summarize" with 0 retries took 3.5. input_tokens=545, output_tokens=126
+15:55:35,217 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:35,218 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "summarize" with 0 retries took 1.5. input_tokens=407, output_tokens=56
+15:55:35,284 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:35,290 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "summarize" with 0 retries took 3.656000000075437. input_tokens=578, output_tokens=181
+15:55:35,303 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:35,304 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "summarize" with 0 retries took 3.687999999965541. input_tokens=288, output_tokens=123
+15:55:35,359 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:35,360 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "summarize" with 0 retries took 0.9060000000754371. input_tokens=182, output_tokens=39
+15:55:35,381 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:35,382 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "summarize" with 0 retries took 1.327999999979511. input_tokens=179, output_tokens=43
+15:55:35,466 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:35,467 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "summarize" with 0 retries took 1.8439999999245629. input_tokens=376, output_tokens=97
+15:55:35,477 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:35,479 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "summarize" with 0 retries took 1.3589999999385327. input_tokens=181, output_tokens=48
+15:55:35,492 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:35,493 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "summarize" with 0 retries took 3.844000000040978. input_tokens=868, output_tokens=179
+15:55:35,513 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:35,519 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "summarize" with 0 retries took 2.2179999999934807. input_tokens=288, output_tokens=96
+15:55:35,554 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:35,560 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "summarize" with 0 retries took 3.9540000000270084. input_tokens=793, output_tokens=253
+15:55:35,562 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:35,566 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "summarize" with 0 retries took 1.25. input_tokens=247, output_tokens=65
+15:55:35,608 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:35,609 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "summarize" with 0 retries took 3.952999999979511. input_tokens=708, output_tokens=172
+15:55:35,716 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:35,719 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "summarize" with 0 retries took 4.092999999993481. input_tokens=405, output_tokens=128
+15:55:35,831 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:35,832 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "summarize" with 0 retries took 2.062999999965541. input_tokens=720, output_tokens=123
+15:55:35,916 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:35,917 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "summarize" with 0 retries took 1.797000000020489. input_tokens=324, output_tokens=75
+15:55:36,92 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:36,93 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "summarize" with 0 retries took 1.3439999999245629. input_tokens=234, output_tokens=44
+15:55:36,125 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:36,126 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "summarize" with 0 retries took 0.9220000000204891. input_tokens=175, output_tokens=34
+15:55:36,383 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:36,388 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "summarize" with 0 retries took 1.640999999945052. input_tokens=388, output_tokens=81
+15:55:36,417 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:36,423 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "summarize" with 0 retries took 1.062999999965541. input_tokens=180, output_tokens=43
+15:55:36,434 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:36,435 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "summarize" with 0 retries took 1.047000000020489. input_tokens=204, output_tokens=45
+15:55:36,503 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:36,506 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "summarize" with 0 retries took 1.375. input_tokens=182, output_tokens=54
+15:55:36,585 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:36,593 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "summarize" with 0 retries took 2.25. input_tokens=201, output_tokens=39
+15:55:36,806 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:36,807 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "summarize" with 0 retries took 1.2349999999860302. input_tokens=184, output_tokens=29
+15:55:36,938 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:36,939 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "summarize" with 0 retries took 1.422000000020489. input_tokens=176, output_tokens=33
+15:55:37,1 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:37,2 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "summarize" with 0 retries took 3.593999999924563. input_tokens=308, output_tokens=82
+15:55:37,5 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:37,5 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "summarize" with 0 retries took 1.5320000000065193. input_tokens=205, output_tokens=50
+15:55:37,36 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:37,37 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "summarize" with 0 retries took 2.359000000054948. input_tokens=287, output_tokens=84
+15:55:37,72 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:37,73 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "summarize" with 0 retries took 2.14000000001397. input_tokens=313, output_tokens=113
+15:55:37,132 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:37,144 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "summarize" with 0 retries took 1.687000000034459. input_tokens=410, output_tokens=86
+15:55:37,161 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:37,162 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "summarize" with 0 retries took 1.5630000000819564. input_tokens=274, output_tokens=73
+15:55:37,234 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:37,235 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "summarize" with 0 retries took 1.1400000000139698. input_tokens=176, output_tokens=42
+15:55:37,434 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:37,435 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "summarize" with 0 retries took 1.875. input_tokens=310, output_tokens=115
+15:55:37,510 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:37,512 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "summarize" with 0 retries took 1.7820000000065193. input_tokens=172, output_tokens=51
+15:55:37,593 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:37,594 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "summarize" with 0 retries took 1.6869999999180436. input_tokens=181, output_tokens=51
+15:55:37,642 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:37,648 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "summarize" with 0 retries took 2.3429999999934807. input_tokens=313, output_tokens=104
+15:55:37,685 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:37,686 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "summarize" with 0 retries took 1.297000000020489. input_tokens=169, output_tokens=42
+15:55:37,776 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:37,777 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "summarize" with 0 retries took 1.937000000034459. input_tokens=251, output_tokens=93
+15:55:37,856 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:37,857 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "summarize" with 0 retries took 1.7179999999934807. input_tokens=173, output_tokens=64
+15:55:37,996 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:37,997 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "summarize" with 0 retries took 1.047000000020489. input_tokens=179, output_tokens=50
+15:55:38,108 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:38,109 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "summarize" with 0 retries took 1.6709999999729916. input_tokens=246, output_tokens=76
+15:55:38,120 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:38,121 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "summarize" with 0 retries took 1.312000000034459. input_tokens=207, output_tokens=62
+15:55:38,272 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:38,274 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "summarize" with 0 retries took 1.2650000000139698. input_tokens=170, output_tokens=42
+15:55:38,345 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:38,346 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "summarize" with 0 retries took 4.405999999959022. input_tokens=304, output_tokens=147
+15:55:38,364 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:38,367 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "summarize" with 0 retries took 1.297000000020489. input_tokens=171, output_tokens=38
+15:55:38,387 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:38,389 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "summarize" with 0 retries took 3.093999999924563. input_tokens=498, output_tokens=157
+15:55:38,393 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:38,403 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "summarize" with 0 retries took 1.812000000034459. input_tokens=174, output_tokens=95
+15:55:38,522 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:38,523 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "summarize" with 0 retries took 3.030999999959022. input_tokens=243, output_tokens=106
+15:55:38,536 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:38,537 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "summarize" with 0 retries took 2.109000000054948. input_tokens=297, output_tokens=93
+15:55:38,563 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:38,569 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "summarize" with 0 retries took 2.062000000034459. input_tokens=227, output_tokens=80
+15:55:38,699 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:38,703 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "summarize" with 0 retries took 1.187000000034459. input_tokens=176, output_tokens=47
+15:55:38,751 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:38,753 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "summarize" with 0 retries took 1.1099999999860302. input_tokens=205, output_tokens=26
+15:55:38,911 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:38,921 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "summarize" with 0 retries took 1.484000000054948. input_tokens=167, output_tokens=40
+15:55:38,953 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:38,954 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "summarize" with 0 retries took 1.9219999999040738. input_tokens=209, output_tokens=83
+15:55:38,959 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:38,964 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "summarize" with 0 retries took 1.7969999999040738. input_tokens=176, output_tokens=49
+15:55:39,107 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:39,108 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "summarize" with 0 retries took 1.5. input_tokens=171, output_tokens=39
+15:55:39,236 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:39,240 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "summarize" with 0 retries took 0.859000000054948. input_tokens=167, output_tokens=20
+15:55:39,281 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:39,282 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "summarize" with 0 retries took 1.1559999999590218. input_tokens=213, output_tokens=67
+15:55:39,320 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:39,324 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "summarize" with 0 retries took 1.6400000000139698. input_tokens=174, output_tokens=76
+15:55:39,638 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:39,640 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "summarize" with 0 retries took 1.2349999999860302. input_tokens=187, output_tokens=57
+15:55:39,653 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:39,654 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "summarize" with 0 retries took 1.077999999979511. input_tokens=174, output_tokens=43
+15:55:39,658 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:39,659 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "summarize" with 0 retries took 1.672000000020489. input_tokens=182, output_tokens=50
+15:55:39,884 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:39,885 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "summarize" with 0 retries took 2.640999999945052. input_tokens=229, output_tokens=122
+15:55:39,898 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:39,899 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "summarize" with 0 retries took 1.547000000020489. input_tokens=181, output_tokens=46
+15:55:39,915 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:39,915 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "summarize" with 0 retries took 1.547000000020489. input_tokens=181, output_tokens=46
+15:55:39,950 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:39,951 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "summarize" with 0 retries took 2.797000000020489. input_tokens=433, output_tokens=170
+15:55:40,75 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:40,76 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "summarize" with 0 retries took 1.547000000020489. input_tokens=212, output_tokens=70
+15:55:40,152 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:40,156 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "summarize" with 0 retries took 2.297000000020489. input_tokens=246, output_tokens=84
+15:55:40,159 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:40,160 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "summarize" with 0 retries took 2.0630000000819564. input_tokens=213, output_tokens=103
+15:55:40,233 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:40,237 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "summarize" with 0 retries took 1.547000000020489. input_tokens=175, output_tokens=47
+15:55:40,279 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:40,284 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "summarize" with 0 retries took 2.5160000000614673. input_tokens=242, output_tokens=119
+15:55:40,296 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:40,300 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "summarize" with 0 retries took 3.297000000020489. input_tokens=212, output_tokens=73
+15:55:40,313 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:40,314 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "summarize" with 0 retries took 6.562000000034459. input_tokens=553, output_tokens=202
+15:55:40,352 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:40,353 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "summarize" with 0 retries took 1.8119999999180436. input_tokens=230, output_tokens=86
+15:55:40,377 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:40,378 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "summarize" with 0 retries took 1.2820000000065193. input_tokens=178, output_tokens=41
+15:55:40,399 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:40,400 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "summarize" with 0 retries took 1.077999999979511. input_tokens=176, output_tokens=36
+15:55:40,529 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:40,533 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "summarize" with 0 retries took 6.688000000081956. input_tokens=1243, output_tokens=395
+15:55:40,564 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:40,569 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "summarize" with 0 retries took 1.812000000034459. input_tokens=175, output_tokens=41
+15:55:40,640 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:40,641 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "summarize" with 0 retries took 1.3589999999385327. input_tokens=252, output_tokens=63
+15:55:40,674 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:40,678 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "summarize" with 0 retries took 1.437999999965541. input_tokens=196, output_tokens=59
+15:55:40,820 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:40,821 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "summarize" with 0 retries took 1.859000000054948. input_tokens=257, output_tokens=108
+15:55:40,852 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:40,853 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "summarize" with 0 retries took 0.9679999999934807. input_tokens=167, output_tokens=38
+15:55:40,994 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:40,995 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "summarize" with 0 retries took 2.031000000075437. input_tokens=211, output_tokens=66
+15:55:41,109 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:41,110 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "summarize" with 0 retries took 1.172000000020489. input_tokens=179, output_tokens=49
+15:55:41,245 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:41,249 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "summarize" with 0 retries took 1.609000000054948. input_tokens=207, output_tokens=48
+15:55:41,263 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:41,269 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "summarize" with 0 retries took 3.0. input_tokens=312, output_tokens=146
+15:55:41,272 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:41,275 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:41,277 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "summarize" with 0 retries took 1.202999999979511. input_tokens=185, output_tokens=55
+15:55:41,280 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "summarize" with 0 retries took 1.125. input_tokens=177, output_tokens=40
+15:55:41,437 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:41,438 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "summarize" with 0 retries took 1.187999999965541. input_tokens=175, output_tokens=40
+15:55:41,871 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:41,872 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "summarize" with 0 retries took 1.577999999979511. input_tokens=215, output_tokens=56
+15:55:41,910 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:41,911 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "summarize" with 0 retries took 1.75. input_tokens=303, output_tokens=64
+15:55:41,992 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:41,993 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "summarize" with 0 retries took 2.077999999979511. input_tokens=205, output_tokens=96
+15:55:42,102 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:42,103 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "summarize" with 0 retries took 1.75. input_tokens=233, output_tokens=76
+15:55:42,172 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:42,173 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "summarize" with 0 retries took 1.640999999945052. input_tokens=233, output_tokens=71
+15:55:42,425 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:42,427 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "summarize" with 0 retries took 1.1570000000065193. input_tokens=183, output_tokens=47
+15:55:42,451 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:42,452 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "summarize" with 0 retries took 1.452999999979511. input_tokens=194, output_tokens=59
+15:55:42,456 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:42,456 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "summarize" with 0 retries took 1.187999999965541. input_tokens=214, output_tokens=46
+15:55:42,475 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:42,476 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "summarize" with 0 retries took 2.077999999979511. input_tokens=269, output_tokens=86
+15:55:42,552 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:42,553 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "summarize" with 0 retries took 1.9070000000065193. input_tokens=277, output_tokens=124
+15:55:42,578 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:42,579 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "summarize" with 0 retries took 1.4689999999245629. input_tokens=250, output_tokens=67
+15:55:42,662 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:42,663 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "summarize" with 0 retries took 1.2190000000409782. input_tokens=183, output_tokens=54
+15:55:42,750 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:42,753 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "summarize" with 0 retries took 3.843999999924563. input_tokens=259, output_tokens=111
+15:55:42,771 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:42,772 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "summarize" with 0 retries took 1.5309999999590218. input_tokens=190, output_tokens=58
+15:55:42,779 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:42,780 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "summarize" with 0 retries took 2.4679999999934807. input_tokens=333, output_tokens=155
+15:55:42,788 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:42,790 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "summarize" with 0 retries took 1.5160000000614673. input_tokens=240, output_tokens=83
+15:55:42,840 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:42,849 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "summarize" with 0 retries took 2.952999999979511. input_tokens=292, output_tokens=114
+15:55:42,868 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:42,869 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "summarize" with 0 retries took 2.297000000020489. input_tokens=188, output_tokens=114
+15:55:42,901 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:42,905 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "summarize" with 0 retries took 2.047000000020489. input_tokens=268, output_tokens=121
+15:55:43,108 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:43,109 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "summarize" with 0 retries took 2.780999999959022. input_tokens=267, output_tokens=174
+15:55:43,118 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:43,119 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "summarize" with 0 retries took 1.125. input_tokens=194, output_tokens=52
+15:55:43,346 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:43,352 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "summarize" with 0 retries took 1.4369999999180436. input_tokens=196, output_tokens=63
+15:55:43,420 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:43,421 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "summarize" with 0 retries took 0.984000000054948. input_tokens=171, output_tokens=32
+15:55:43,548 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:43,549 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "summarize" with 0 retries took 1.1099999999860302. input_tokens=195, output_tokens=43
+15:55:44,6 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:44,7 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "summarize" with 0 retries took 3.187999999965541. input_tokens=276, output_tokens=123
+15:55:44,15 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:44,17 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "summarize" with 0 retries took 2.155999999959022. input_tokens=391, output_tokens=128
+15:55:44,37 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:44,39 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "summarize" with 0 retries took 4.391000000061467. input_tokens=348, output_tokens=138
+15:55:44,130 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:44,131 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "summarize" with 0 retries took 3.452999999979511. input_tokens=343, output_tokens=129
+15:55:44,158 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:44,159 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "summarize" with 0 retries took 1.984000000054948. input_tokens=204, output_tokens=69
+15:55:44,163 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:44,166 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "summarize" with 0 retries took 4.5. input_tokens=250, output_tokens=99
+15:55:44,309 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:44,310 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "summarize" with 0 retries took 1.8440000000409782. input_tokens=235, output_tokens=67
+15:55:44,691 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:44,692 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "summarize" with 0 retries took 2.594000000040978. input_tokens=198, output_tokens=63
+15:55:45,573 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:55:45,574 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "summarize" with 0 retries took 5.187000000034459. input_tokens=256, output_tokens=135
+15:55:45,597 graphrag.index.emit.parquet_table_emitter INFO emitting parquet table create_summarized_entities.parquet
+15:55:45,745 graphrag.index.run INFO Running workflow: create_base_entity_graph...
+15:55:45,745 graphrag.index.run INFO dependencies for create_base_entity_graph: ['create_summarized_entities']
+15:55:45,746 graphrag.index.run INFO read table from storage: create_summarized_entities.parquet
+15:55:45,761 datashaper.workflow.workflow INFO executing verb cluster_graph
+15:55:45,845 datashaper.workflow.workflow INFO executing verb select
+15:55:45,848 graphrag.index.emit.parquet_table_emitter INFO emitting parquet table create_base_entity_graph.parquet
+15:55:45,986 graphrag.index.run INFO Running workflow: create_final_entities...
+15:55:45,986 graphrag.index.run INFO dependencies for create_final_entities: ['create_base_entity_graph']
+15:55:45,987 graphrag.index.run INFO read table from storage: create_base_entity_graph.parquet
+15:55:46,5 datashaper.workflow.workflow INFO executing verb unpack_graph
+15:55:46,36 datashaper.workflow.workflow INFO executing verb rename
+15:55:46,44 datashaper.workflow.workflow INFO executing verb select
+15:55:46,53 datashaper.workflow.workflow INFO executing verb dedupe
+15:55:46,61 datashaper.workflow.workflow INFO executing verb rename
+15:55:46,70 datashaper.workflow.workflow INFO executing verb filter
+15:55:46,94 datashaper.workflow.workflow INFO executing verb text_split
+15:55:46,106 datashaper.workflow.workflow INFO executing verb drop
+15:55:46,116 datashaper.workflow.workflow INFO executing verb merge
+15:55:46,181 datashaper.workflow.workflow INFO executing verb text_embed
+15:55:46,182 graphrag.llm.openai.create_openai_client INFO Creating OpenAI client base_url=https://chatgptproxyapi-5uc.pages.dev/v1
+15:55:47,56 graphrag.index.llm.load_llm INFO create TPM/RPM limiter for text-embedding-3-small: TPM=0, RPM=0
+15:55:47,56 graphrag.index.llm.load_llm INFO create concurrency limiter for text-embedding-3-small: 25
+15:55:47,132 graphrag.index.verbs.text.embed.strategies.openai INFO embedding 334 inputs via 334 snippets using 21 batches. max_batch_size=16, max_tokens=8191
+15:55:47,986 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/embeddings "HTTP/1.1 200 OK"
+15:55:47,999 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/embeddings "HTTP/1.1 200 OK"
+15:55:48,29 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/embeddings "HTTP/1.1 200 OK"
+15:55:48,31 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/embeddings "HTTP/1.1 200 OK"
+15:55:48,32 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/embeddings "HTTP/1.1 200 OK"
+15:55:48,35 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/embeddings "HTTP/1.1 200 OK"
+15:55:48,36 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/embeddings "HTTP/1.1 200 OK"
+15:55:48,44 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/embeddings "HTTP/1.1 200 OK"
+15:55:48,71 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/embeddings "HTTP/1.1 200 OK"
+15:55:48,73 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/embeddings "HTTP/1.1 200 OK"
+15:55:48,79 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/embeddings "HTTP/1.1 200 OK"
+15:55:48,80 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/embeddings "HTTP/1.1 200 OK"
+15:55:48,81 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/embeddings "HTTP/1.1 200 OK"
+15:55:48,84 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/embeddings "HTTP/1.1 200 OK"
+15:55:48,100 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/embeddings "HTTP/1.1 200 OK"
+15:55:48,109 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/embeddings "HTTP/1.1 200 OK"
+15:55:48,149 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/embeddings "HTTP/1.1 200 OK"
+15:55:48,167 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/embeddings "HTTP/1.1 200 OK"
+15:55:48,247 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/embeddings "HTTP/1.1 200 OK"
+15:55:48,286 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/embeddings "HTTP/1.1 200 OK"
+15:55:48,312 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/embeddings "HTTP/1.1 200 OK"
+15:55:48,478 graphrag.llm.base.rate_limiting_llm INFO perf - llm.embedding "Process" with 0 retries took 1.3429999999934807. input_tokens=1150, output_tokens=0
+15:55:48,533 graphrag.llm.base.rate_limiting_llm INFO perf - llm.embedding "Process" with 0 retries took 1.359000000054948. input_tokens=641, output_tokens=0
+15:55:48,631 graphrag.llm.base.rate_limiting_llm INFO perf - llm.embedding "Process" with 0 retries took 1.4689999999245629. input_tokens=850, output_tokens=0
+15:55:48,694 graphrag.llm.base.rate_limiting_llm INFO perf - llm.embedding "Process" with 0 retries took 1.547000000020489. input_tokens=1809, output_tokens=0
+15:55:48,712 graphrag.llm.base.rate_limiting_llm INFO perf - llm.embedding "Process" with 0 retries took 1.5469999999040738. input_tokens=593, output_tokens=0
+15:55:48,775 graphrag.llm.base.rate_limiting_llm INFO perf - llm.embedding "Process" with 0 retries took 1.625. input_tokens=1768, output_tokens=0
+15:55:48,794 graphrag.llm.base.rate_limiting_llm INFO perf - llm.embedding "Process" with 0 retries took 1.6410000000614673. input_tokens=939, output_tokens=0
+15:55:48,811 graphrag.llm.base.rate_limiting_llm INFO perf - llm.embedding "Process" with 0 retries took 1.625. input_tokens=486, output_tokens=0
+15:55:48,827 graphrag.llm.base.rate_limiting_llm INFO perf - llm.embedding "Process" with 0 retries took 1.6400000000139698. input_tokens=750, output_tokens=0
+15:55:48,843 graphrag.llm.base.rate_limiting_llm INFO perf - llm.embedding "Process" with 0 retries took 1.687999999965541. input_tokens=680, output_tokens=0
+15:55:48,880 graphrag.llm.base.rate_limiting_llm INFO perf - llm.embedding "Process" with 0 retries took 1.7189999999245629. input_tokens=821, output_tokens=0
+15:55:48,905 graphrag.llm.base.rate_limiting_llm INFO perf - llm.embedding "Process" with 0 retries took 1.7179999999934807. input_tokens=626, output_tokens=0
+15:55:48,926 graphrag.llm.base.rate_limiting_llm INFO perf - llm.embedding "Process" with 0 retries took 1.75. input_tokens=522, output_tokens=0
+15:55:48,942 graphrag.llm.base.rate_limiting_llm INFO perf - llm.embedding "Process" with 0 retries took 1.7809999999590218. input_tokens=546, output_tokens=0
+15:55:48,958 graphrag.llm.base.rate_limiting_llm INFO perf - llm.embedding "Process" with 0 retries took 1.7969999999040738. input_tokens=571, output_tokens=0
+15:55:48,973 graphrag.llm.base.rate_limiting_llm INFO perf - llm.embedding "Process" with 0 retries took 1.7959999999729916. input_tokens=471, output_tokens=0
+15:55:48,992 graphrag.llm.base.rate_limiting_llm INFO perf - llm.embedding "Process" with 0 retries took 1.827999999979511. input_tokens=506, output_tokens=0
+15:55:49,21 graphrag.llm.base.rate_limiting_llm INFO perf - llm.embedding "Process" with 0 retries took 1.8589999999385327. input_tokens=519, output_tokens=0
+15:55:49,38 graphrag.llm.base.rate_limiting_llm INFO perf - llm.embedding "Process" with 0 retries took 1.859000000054948. input_tokens=499, output_tokens=0
+15:55:49,55 graphrag.llm.base.rate_limiting_llm INFO perf - llm.embedding "Process" with 0 retries took 1.9070000000065193. input_tokens=1157, output_tokens=0
+15:55:49,74 graphrag.llm.base.rate_limiting_llm INFO perf - llm.embedding "Process" with 0 retries took 1.9059999999590218. input_tokens=664, output_tokens=0
+15:55:49,110 datashaper.workflow.workflow INFO executing verb drop
+15:55:49,121 datashaper.workflow.workflow INFO executing verb filter
+15:55:49,139 graphrag.index.emit.parquet_table_emitter INFO emitting parquet table create_final_entities.parquet
+15:55:49,360 graphrag.index.run INFO Running workflow: create_final_nodes...
+15:55:49,360 graphrag.index.run INFO dependencies for create_final_nodes: ['create_base_entity_graph']
+15:55:49,360 graphrag.index.run INFO read table from storage: create_base_entity_graph.parquet
+15:55:49,384 datashaper.workflow.workflow INFO executing verb layout_graph
+15:55:49,512 datashaper.workflow.workflow INFO executing verb unpack_graph
+15:55:49,553 datashaper.workflow.workflow INFO executing verb unpack_graph
+15:55:49,594 datashaper.workflow.workflow INFO executing verb drop
+15:55:49,606 datashaper.workflow.workflow INFO executing verb filter
+15:55:49,639 datashaper.workflow.workflow INFO executing verb select
+15:55:49,651 datashaper.workflow.workflow INFO executing verb rename
+15:55:49,664 datashaper.workflow.workflow INFO executing verb convert
+15:55:49,706 datashaper.workflow.workflow INFO executing verb join
+15:55:49,724 datashaper.workflow.workflow INFO executing verb rename
+15:55:49,727 graphrag.index.emit.parquet_table_emitter INFO emitting parquet table create_final_nodes.parquet
+15:55:49,903 graphrag.index.run INFO Running workflow: create_final_communities...
+15:55:49,903 graphrag.index.run INFO dependencies for create_final_communities: ['create_base_entity_graph']
+15:55:49,904 graphrag.index.run INFO read table from storage: create_base_entity_graph.parquet
+15:55:49,933 datashaper.workflow.workflow INFO executing verb unpack_graph
+15:55:49,972 datashaper.workflow.workflow INFO executing verb unpack_graph
+15:55:50,10 datashaper.workflow.workflow INFO executing verb aggregate_override
+15:55:50,26 datashaper.workflow.workflow INFO executing verb join
+15:55:50,47 datashaper.workflow.workflow INFO executing verb join
+15:55:50,67 datashaper.workflow.workflow INFO executing verb concat
+15:55:50,83 datashaper.workflow.workflow INFO executing verb filter
+15:55:50,141 datashaper.workflow.workflow INFO executing verb aggregate_override
+15:55:50,161 datashaper.workflow.workflow INFO executing verb join
+15:55:50,181 datashaper.workflow.workflow INFO executing verb filter
+15:55:50,218 datashaper.workflow.workflow INFO executing verb fill
+15:55:50,234 datashaper.workflow.workflow INFO executing verb merge
+15:55:50,255 datashaper.workflow.workflow INFO executing verb copy
+15:55:50,272 datashaper.workflow.workflow INFO executing verb select
+15:55:50,274 graphrag.index.emit.parquet_table_emitter INFO emitting parquet table create_final_communities.parquet
+15:55:50,474 graphrag.index.run INFO Running workflow: join_text_units_to_entity_ids...
+15:55:50,475 graphrag.index.run INFO dependencies for join_text_units_to_entity_ids: ['create_final_entities']
+15:55:50,475 graphrag.index.run INFO read table from storage: create_final_entities.parquet
+15:55:50,531 datashaper.workflow.workflow INFO executing verb select
+15:55:50,549 datashaper.workflow.workflow INFO executing verb unroll
+15:55:50,572 datashaper.workflow.workflow INFO executing verb aggregate_override
+15:55:50,578 graphrag.index.emit.parquet_table_emitter INFO emitting parquet table join_text_units_to_entity_ids.parquet
+15:55:50,762 graphrag.index.run INFO Running workflow: create_final_relationships...
+15:55:50,762 graphrag.index.run INFO dependencies for create_final_relationships: ['create_final_nodes', 'create_base_entity_graph']
+15:55:50,763 graphrag.index.run INFO read table from storage: create_final_nodes.parquet
+15:55:50,768 graphrag.index.run INFO read table from storage: create_base_entity_graph.parquet
+15:55:50,808 datashaper.workflow.workflow INFO executing verb unpack_graph
+15:55:50,853 datashaper.workflow.workflow INFO executing verb filter
+15:55:50,909 datashaper.workflow.workflow INFO executing verb rename
+15:55:50,933 datashaper.workflow.workflow INFO executing verb filter
+15:55:50,979 datashaper.workflow.workflow INFO executing verb drop
+15:55:51,0 datashaper.workflow.workflow INFO executing verb compute_edge_combined_degree
+15:55:51,23 datashaper.workflow.workflow INFO executing verb convert
+15:55:51,68 datashaper.workflow.workflow INFO executing verb convert
+15:55:51,71 graphrag.index.emit.parquet_table_emitter INFO emitting parquet table create_final_relationships.parquet
+15:55:51,287 graphrag.index.run INFO Running workflow: join_text_units_to_relationship_ids...
+15:55:51,287 graphrag.index.run INFO dependencies for join_text_units_to_relationship_ids: ['create_final_relationships']
+15:55:51,287 graphrag.index.run INFO read table from storage: create_final_relationships.parquet
+15:55:51,336 datashaper.workflow.workflow INFO executing verb select
+15:55:51,359 datashaper.workflow.workflow INFO executing verb unroll
+15:55:51,382 datashaper.workflow.workflow INFO executing verb aggregate_override
+15:55:51,410 datashaper.workflow.workflow INFO executing verb select
+15:55:51,413 graphrag.index.emit.parquet_table_emitter INFO emitting parquet table join_text_units_to_relationship_ids.parquet
+15:55:51,632 graphrag.index.run INFO Running workflow: create_final_community_reports...
+15:55:51,641 graphrag.index.run INFO dependencies for create_final_community_reports: ['create_final_nodes', 'create_final_relationships']
+15:55:51,642 graphrag.index.run INFO read table from storage: create_final_nodes.parquet
+15:55:51,647 graphrag.index.run INFO read table from storage: create_final_relationships.parquet
+15:55:51,692 datashaper.workflow.workflow INFO executing verb prepare_community_reports_nodes
+15:55:51,720 datashaper.workflow.workflow INFO executing verb prepare_community_reports_edges
+15:55:51,747 datashaper.workflow.workflow INFO executing verb restore_community_hierarchy
+15:55:51,774 datashaper.workflow.workflow INFO executing verb prepare_community_reports
+15:55:51,775 graphrag.index.verbs.graph.report.prepare_community_reports INFO Number of nodes at level=1 => 334
+15:55:51,835 graphrag.index.verbs.graph.report.prepare_community_reports INFO Number of nodes at level=0 => 334
+15:55:51,953 datashaper.workflow.workflow INFO executing verb create_community_reports
+15:56:01,540 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:56:01,545 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "create_community_report" with 0 retries took 9.563000000081956. input_tokens=2309, output_tokens=507
+15:56:03,67 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:56:03,69 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "create_community_report" with 0 retries took 11.062000000034459. input_tokens=2598, output_tokens=706
+15:56:03,95 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:56:03,96 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "create_community_report" with 0 retries took 11.077999999979511. input_tokens=2694, output_tokens=748
+15:56:03,304 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:56:03,305 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "create_community_report" with 0 retries took 11.297000000020489. input_tokens=2761, output_tokens=670
+15:56:04,752 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:56:04,760 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "create_community_report" with 0 retries took 12.75. input_tokens=2743, output_tokens=773
+15:56:04,817 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:56:04,819 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "create_community_report" with 0 retries took 12.827999999979511. input_tokens=3285, output_tokens=779
+15:56:05,459 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:56:05,460 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "create_community_report" with 0 retries took 13.48499999998603. input_tokens=2703, output_tokens=761
+15:56:06,810 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:56:06,811 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "create_community_report" with 0 retries took 14.812999999965541. input_tokens=3114, output_tokens=818
+15:56:12,618 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:56:12,620 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "create_community_report" with 0 retries took 20.641000000061467. input_tokens=14791, output_tokens=1249
+15:56:13,341 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:56:13,343 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "create_community_report" with 0 retries took 21.343999999924563. input_tokens=4020, output_tokens=1261
+15:56:20,344 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:56:20,345 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "create_community_report" with 0 retries took 6.89000000001397. input_tokens=2202, output_tokens=458
+15:56:20,369 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:56:20,370 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "create_community_report" with 0 retries took 6.969000000040978. input_tokens=2168, output_tokens=495
+15:56:20,405 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:56:20,406 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "create_community_report" with 0 retries took 6.952999999979511. input_tokens=2087, output_tokens=360
+15:56:20,776 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:56:20,777 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "create_community_report" with 0 retries took 7.312000000034459. input_tokens=2244, output_tokens=492
+15:56:22,117 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:56:22,118 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "create_community_report" with 0 retries took 8.672000000020489. input_tokens=2267, output_tokens=571
+15:56:22,892 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:56:22,894 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "create_community_report" with 0 retries took 9.437000000034459. input_tokens=2102, output_tokens=348
+15:56:22,924 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:56:22,930 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "create_community_report" with 0 retries took 9.515999999945052. input_tokens=2130, output_tokens=495
+15:56:23,996 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:56:23,997 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "create_community_report" with 0 retries took 10.577999999979511. input_tokens=2235, output_tokens=658
+15:56:24,23 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:56:24,25 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "create_community_report" with 0 retries took 10.59299999999348. input_tokens=2413, output_tokens=632
+15:56:24,919 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:56:24,920 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "create_community_report" with 0 retries took 11.5. input_tokens=2245, output_tokens=646
+15:56:25,692 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:56:25,693 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "create_community_report" with 0 retries took 12.297000000020489. input_tokens=3160, output_tokens=942
+15:56:26,979 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:56:26,980 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "create_community_report" with 0 retries took 13.577999999979511. input_tokens=5715, output_tokens=941
+15:56:27,230 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:56:27,232 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "create_community_report" with 0 retries took 13.795999999972992. input_tokens=2431, output_tokens=795
+15:56:27,498 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:56:27,499 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "create_community_report" with 0 retries took 14.047000000020489. input_tokens=2925, output_tokens=816
+15:56:29,292 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:56:29,294 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "create_community_report" with 0 retries took 15.859000000054948. input_tokens=4059, output_tokens=1061
+15:56:35,684 httpx INFO HTTP Request: POST https://chatgptproxyapi-5uc.pages.dev/v1/chat/completions "HTTP/1.1 200 OK"
+15:56:35,693 graphrag.llm.base.rate_limiting_llm INFO perf - llm.chat "create_community_report" with 0 retries took 22.31200000003446. input_tokens=16448, output_tokens=1588
+15:56:35,742 datashaper.workflow.workflow INFO executing verb window
+15:56:35,745 graphrag.index.emit.parquet_table_emitter INFO emitting parquet table create_final_community_reports.parquet
+15:56:35,990 graphrag.index.run INFO Running workflow: create_final_text_units...
+15:56:35,990 graphrag.index.run INFO dependencies for create_final_text_units: ['join_text_units_to_entity_ids', 'join_text_units_to_relationship_ids', 'create_base_text_units']
+15:56:35,993 graphrag.index.run INFO read table from storage: join_text_units_to_entity_ids.parquet
+15:56:35,996 graphrag.index.run INFO read table from storage: join_text_units_to_relationship_ids.parquet
+15:56:35,999 graphrag.index.run INFO read table from storage: create_base_text_units.parquet
+15:56:36,48 datashaper.workflow.workflow INFO executing verb select
+15:56:36,71 datashaper.workflow.workflow INFO executing verb rename
+15:56:36,95 datashaper.workflow.workflow INFO executing verb join
+15:56:36,123 datashaper.workflow.workflow INFO executing verb join
+15:56:36,152 datashaper.workflow.workflow INFO executing verb aggregate_override
+15:56:36,178 datashaper.workflow.workflow INFO executing verb select
+15:56:36,180 graphrag.index.emit.parquet_table_emitter INFO emitting parquet table create_final_text_units.parquet
+15:56:36,399 graphrag.index.run INFO Running workflow: create_base_documents...
+15:56:36,400 graphrag.index.run INFO dependencies for create_base_documents: ['create_final_text_units']
+15:56:36,400 graphrag.index.run INFO read table from storage: create_final_text_units.parquet
+15:56:36,452 datashaper.workflow.workflow INFO executing verb unroll
+15:56:36,478 datashaper.workflow.workflow INFO executing verb select
+15:56:36,503 datashaper.workflow.workflow INFO executing verb rename
+15:56:36,528 datashaper.workflow.workflow INFO executing verb join
+15:56:36,558 datashaper.workflow.workflow INFO executing verb aggregate_override
+15:56:36,585 datashaper.workflow.workflow INFO executing verb join
+15:56:36,616 datashaper.workflow.workflow INFO executing verb rename
+15:56:36,642 datashaper.workflow.workflow INFO executing verb convert
+15:56:36,671 graphrag.index.emit.parquet_table_emitter INFO emitting parquet table create_base_documents.parquet
+15:56:36,849 graphrag.index.run INFO Running workflow: create_final_documents...
+15:56:36,849 graphrag.index.run INFO dependencies for create_final_documents: ['create_base_documents']
+15:56:36,849 graphrag.index.run INFO read table from storage: create_base_documents.parquet
+15:56:36,905 datashaper.workflow.workflow INFO executing verb rename
+15:56:36,907 graphrag.index.emit.parquet_table_emitter INFO emitting parquet table create_final_documents.parquet
