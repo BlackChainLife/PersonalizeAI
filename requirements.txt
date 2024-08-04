@@ -1,0 +1,6 @@
+streamlit~=1.37.0
+langchain~=0.2.11
+openai~=1.37.1
+python-dotenv~=1.0.1
+fastapi~=0.111.1
+langgraph~=0.1.15

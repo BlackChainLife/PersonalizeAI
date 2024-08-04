@@ -2,13 +2,13 @@ import os, sys
 from openai import OpenAI
 from openai.types.model import Model
 from dotenv import load_dotenv
-from openai_usage.schema import openAIModel  # 修正了拼写错误
 from typing import List
 
-load_dotenv()
 
-openai_api_key = os.getenv("OPENAI_API_KEY")
-openai_api_base = os.getenv("OPENAI_API_BASE")
+openai_api_base = "https://chatgptproxyapi-5uc.pages.dev/v1"
+openai_api_key = "sk-proj-47lXqDtlw7AHKd3jZv8nT3BlbkFJs7xLLXX4NmTzQSVsJVCm"
+
+
 
 client = OpenAI(api_key=openai_api_key, base_url=openai_api_base)
 

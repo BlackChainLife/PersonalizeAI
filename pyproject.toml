@@ -2,11 +2,21 @@
 name = "personalizeai"
 version = "0.1.0"
 description = ""
-authors = ["Your Name <you@example.com>"]
+authors = ["Wangmun <dreamskywk@outlook.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.11"
+openai = "^1.37.1"
+python-dotenv = "^1.0.1"
+langchain = "^0.2.11"
+langgraph = "^0.1.15"
+langchain-openai = "^0.1.19"
+fastapi = "^0.111.1"
+streamlit = "^1.37.0"
+socks = "^0"
+pysocks = "^1.7.1"
+langchain-community = "^0.2.11"
 
 
 [build-system]
