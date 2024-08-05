@@ -11,7 +11,7 @@ from langchain_core.runnables import RunnablePassthrough
 
 from dotenv import load_dotenv
 
-from apps.service.get_config_openai import OPENAI_MODEL_LIST
+from apps.service.llm.get_config_openai import OPENAI_MODEL_LIST
 
 
 # 加载环境变量
